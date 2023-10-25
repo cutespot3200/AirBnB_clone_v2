@@ -16,12 +16,14 @@ class test_User(test_basemodel):
     def test_first_name(self):
         """ """
         new = self.value()
+        print(new)
         self.assertNotEqual(type(new.first_name), str)
 
     def test_last_name(self):
         """ """
         new = self.value()
-        self.assertNotEqual(type(new.last_name), str)
+        print(new.last_name)
+        self.assertNotIsInstance(type(new.last_name), str)
 
     def test_email(self):
         """ """

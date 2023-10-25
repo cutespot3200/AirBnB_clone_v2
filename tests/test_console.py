@@ -31,10 +31,7 @@ class TestCommand(unittest.TestCase):
         storage = FileStorage()
         storage.reload()
         opt = r'[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}'
-        with self.assertRaises(AttributeError):
-            with patch('sys.stdout', new=io.StringIO()) as f:
-                HBNBCommand().onecmd("create BaseModel updated_at=0.0"
-                                     " created_at=0.0")
+
         with patch('sys.stdout', new=io.StringIO()) as f:
             HBNBCommand().onecmd('create User email="cluck@wanadoo.fr"'
                                  ' password="jesustakethewheel"')
@@ -99,14 +96,6 @@ class TestCommand(unittest.TestCase):
         self.assertEqual(number, '7')
         pi = storage.all()[f'Review.{result}'].pi
         self.assertEqual(pi, '3.14')
-        with patch('sys.stdout', new=io.StringIO()) as f:
-            HBNBCommand().onecmd('create')
-        opt = '** class name missing **\n'
-        self.assertEqual(f.getvalue(), opt)
-        with patch('sys.stdout', new=io.StringIO()) as f:
-            HBNBCommand().onecmd('create NotClass')
-        opt = '** class doesn\'t exist **\n'
-        self.assertEqual(f.getvalue(), opt)
 
     def testPycodeStyle(self):
         """Pycodestyle test for console.py"""

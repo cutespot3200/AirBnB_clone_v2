@@ -1,5 +1,5 @@
 #!/usr/bin/pyhthon3
-"""Module for the test of MySQL"""
+"""MySQL"""
 import MySQLdb
 import unittest
 from unittest.mock import patch
@@ -12,7 +12,7 @@ import os
 
 @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db', "Not DBStorage")
 class TestMySQL(unittest.TestCase):
-    """Test for the SQL database"""
+    """Test for SQL database"""
     conn = None
     cur = None
 
@@ -27,14 +27,14 @@ class TestMySQL(unittest.TestCase):
         self.cur = self.conn.cursor()
 
     def disconnection(self):
-        """Disconnect from MySQLdb"""
+        """Disconnecting MySQLdb"""
         self.cur.close()
         self.conn.close()
         self.conn = None
         self.cur = None
 
     def test_create_state(self):
-        """Test create of a State"""
+        """Test for create State"""
         self.connection()
         with patch('sys.stdout', new=io.StringIO()) as f:
             HBNBCommand().onecmd('create State name="California"')
@@ -44,7 +44,7 @@ class TestMySQL(unittest.TestCase):
         self.disconnection()
 
     def test_create_city(self):
-        """Test create of a City"""
+        """Test for create City"""
         self.connection()
         with patch('sys.stdout', new=io.StringIO()) as f:
             HBNBCommand().onecmd('create State name="California"')
