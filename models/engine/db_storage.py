@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Class sqlAlchemy """
+""" new class for sqlAlchemy """
 from os import getenv
 from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy import (create_engine)
@@ -14,12 +14,12 @@ from models.amenity import Amenity
 
 
 class DBStorage:
-    """create tables in environment"""
+    """ create tables in environmental"""
     __engine = None
     __session = None
 
     def __init__(self):
-        """ instantiation """
+        """Instantiation method"""
         user = getenv("HBNB_MYSQL_USER")
         passwd = getenv("HBNB_MYSQL_PWD")
         db = getenv("HBNB_MYSQL_DB")
@@ -34,7 +34,7 @@ class DBStorage:
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
-        """returns a dictionary representation of objects
+        """returns a dictionary
         Return:
             returns a dictionary of __object
         """
@@ -56,25 +56,30 @@ class DBStorage:
         return (dic)
 
     def new(self, obj):
-        """add new element in the table"""
+        """add a new element in the table
+        """
         self.__session.add(obj)
 
     def save(self):
-        """save data"""
+        """save changes
+        """
         self.__session.commit()
 
     def delete(self, obj=None):
-        """delete element in table"""
+        """delete an element in the table
+        """
         if obj:
             self.session.delete(obj)
 
     def reload(self):
-        """reload data"""
+        """configuration
+        """
         Base.metadata.create_all(self.__engine)
         sec = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(sec)
         self.__session = Session()
 
     def close(self):
-        """ calls remove function"""
+        """ calls remove()
+        """
         self.__session.close()

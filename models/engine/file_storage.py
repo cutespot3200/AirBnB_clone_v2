@@ -1,29 +1,23 @@
 #!/usr/bin/python3
-"""This is the module file storage class for AirBnB"""
+"""This module defines a class to manage file storage for hbnb clone"""
 import json
 from models.base_model import BaseModel
-from models.user import User
-from models.state import State
-from models.city import City
 from models.amenity import Amenity
+from models.city import City
 from models.place import Place
 from models.review import Review
+from models.state import State
+from models.user import User
 import shlex
 
 
 class FileStorage:
-    """This class manages storage of hhnb models in JSON format:
-        __file_path: path to the JSON file
-        __objects: objects will be stored
-    """
-    __file_path = "file.json"
+    """This class manages storage of hbnb models in JSON format"""
+    __file_path = 'file.json'
     __objects = {}
 
     def all(self, cls=None):
-        """returns a dictionary
-        Return:
-            returns a dictionary of __object
-        """
+        """Returns a dictionary of models currently in storage"""
         dic = {}
         if cls:
             dictionary = self.__objects
@@ -37,14 +31,13 @@ class FileStorage:
             return self.__objects
 
     def new(self, obj):
-        """ Adds new object to storage dictionary """
+        """Adds new object to storage dictionary"""
         if obj:
             key = "{}.{}".format(type(obj).__name__, obj.id)
             self.__objects[key] = obj
 
     def save(self):
-        """serialize the file path to JSON file path
-        """
+        """Saves storage dictionary to file"""
         my_dict = {}
         for key, value in self.__objects.items():
             my_dict[key] = value.to_dict()
@@ -52,8 +45,7 @@ class FileStorage:
             json.dump(my_dict, f)
 
     def reload(self):
-        """ Loads storage dictionary from file
-        """
+        """Loads storage dictionary from file"""
         try:
             with open(self.__file_path, 'r', encoding="UTF-8") as f:
                 for key, value in (json.load(f)).items():
@@ -63,13 +55,11 @@ class FileStorage:
             pass
 
     def delete(self, obj=None):
-        """ deletes an existing element
-        """
+        """Method that deletes obj from __objects"""
         if obj:
             key = "{}.{}".format(type(obj).__name__, obj.id)
             del self.__objects[key]
 
     def close(self):
-        """ calls reload()
-        """
+        """ """
         self.reload()
