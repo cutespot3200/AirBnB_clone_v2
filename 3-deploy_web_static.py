@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+# Sets up a web server for deployment of web_static
 """
     Fabric script that creates and distributes an archive
     on my web servers, using deploy function
