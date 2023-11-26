@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+<<<<<<< HEAD
 """Defines unnittests for models/engine/db_storage.py."""
 import pep8
 import models
@@ -80,6 +81,26 @@ class TestDBStorage(unittest.TestCase):
 
     def test_docstrings(self):
         """Check for docstrings."""
+=======
+""" Test module for the Database storage"""
+
+import unittest
+import pycodestyle
+from models.engine.db_storage import DBStorage
+
+
+class TestDBStorage(unittest.TestCase):
+    """ Clas TestDBStorage for testing the database storage"""
+
+    def testPycodeStyle(self):
+        """Test for pycodestyle compliancy in DBStorage"""
+        style = pycodestyle.StyleGuide(quiet=True)
+        p = style.check_files(['models/engine/db_storage.py'])
+        self.assertEqual(p.total_errors, 0, "fix pep8")
+
+    def test_docstring_DBStorage(self):
+        """Test for docstring in DBStorage"""
+>>>>>>> 085c51e4784203ad3f64edacc9c5d08610e434e6
         self.assertIsNotNone(DBStorage.__doc__)
         self.assertIsNotNone(DBStorage.__init__.__doc__)
         self.assertIsNotNone(DBStorage.all.__doc__)
@@ -88,6 +109,7 @@ class TestDBStorage(unittest.TestCase):
         self.assertIsNotNone(DBStorage.delete.__doc__)
         self.assertIsNotNone(DBStorage.reload.__doc__)
 
+<<<<<<< HEAD
     @unittest.skipIf(type(models.storage) == FileStorage,
                      "Testing FileStorage")
     def test_attributes(self):
@@ -183,6 +205,8 @@ class TestDBStorage(unittest.TestCase):
         self.storage._DBStorage__session.close()
         self.storage._DBStorage__session = og_session
 
+=======
+>>>>>>> 085c51e4784203ad3f64edacc9c5d08610e434e6
 
 if __name__ == "__main__":
     unittest.main()
